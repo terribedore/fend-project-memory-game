@@ -1,7 +1,13 @@
 /*
  * Create a list that holds all of your cards
  */
+/* TODO: Do that ^^ using a `const`!
+const array{
+  name: "diamond";
+  symbol: fa fa-diamond
+}
 
+*/
 
 /*
  * Display the cards on the page
