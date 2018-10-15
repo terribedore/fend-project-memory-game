@@ -1,13 +1,13 @@
 /*
  * Create a list that holds all of your cards
  */
-/* TODO: Do that ^^ using a `const`!
+
+/* TODO: Do above ^^ using a `const` function!
 const array{
   name: "diamond";
   symbol: fa fa-diamond
 }
-
-*/
+ */
 
 /*
  * Display the cards on the page
@@ -18,17 +18,17 @@ const array{
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
+  var currentIndex = array.length, temporaryValue, randomIndex;
 
-    while (currentIndex !== 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-    }
+  while (currentIndex !== 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
 
-    return array;
+  return array;
 }
 
 
@@ -42,3 +42,13 @@ function shuffle(array) {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+
+/* TODO: display card's symbol using `.addeventListener` function. Try using 'click' as the listener and 'toggle' as the action. Do I have to use `open` AND `show` classes here? Try just `open` first.
+card.addeventListener('click', event => {
+  const clickTarget = event.target;
+
+  if (clickTarget.classlist.contains('card')) //then// {
+    clickTarget.classlist.toggle('open');
+  }
+});
+*/
