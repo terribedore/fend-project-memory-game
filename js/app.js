@@ -11,7 +11,7 @@
 const deck = document.querySelector('.deck');
 
 // Other Global Scope Items
-let toggledCards = [];
+let toggledCards = []; // List of Cards. Creates the list of clicked and flipped card(s).
 let moves = 0;
 let clockOff = true;
 let time = 0;
@@ -27,19 +27,6 @@ checkScore(); // 2 stars
 
 writeModalStats(); // write stats to the modal
 toggleModal(); // opens modal
-
-
-// shuffle nodes and turn into array.
-function shuffleDeck() {
-  const cardsToShuffle = Array.from(document.querySelectorAll('.deck li'));
-  // console.log("Cards to Shuffle", cardsToShuffle); // original grouping.
-  const shuffledCards = shuffle(cardsToShuffle);
-  // console.log("Shuffled Cards", shuffledCards); // shuffled grouping.
-  for (card of shuffledCards) {
-    deck.appendChild(card);
-  }
-}
-shuffleDeck();
 
 /*
  * Display the cards on the page
@@ -62,6 +49,18 @@ function shuffle(array) {
 
   return array;
 }
+
+// shuffle nodes, turn into array, add to HTML.
+function shuffleDeck() {
+  const cardsToShuffle = Array.from(document.querySelectorAll('.deck li'));
+  // console.log("Cards to Shuffle", cardsToShuffle); // original grouping.
+  const shuffledCards = shuffle(cardsToShuffle);
+  // console.log("Shuffled Cards", shuffledCards); // shuffled grouping.
+  for (card of shuffledCards) {
+    deck.appendChild(card);
+  }
+}
+shuffleDeck();
 
 /*
  * set up the event listener for a card. If a card is clicked:
@@ -106,16 +105,19 @@ function isClickValid(clickTarget) {
   );
 }
 
+// flip card function. Actual card flip.
 function toggleCard(clickTarget) {
 clickTarget.classList.toggle('open');
 clickTarget.classList.toggle('show');
 }
 
+// add flipped card function. Sends the clicked cards into the below `flippedCards` array (list).
 function addToggleCard(clickTarget) {
   toggledCards.push(clickTarget);
   console.log(toggledCards);
 }
 
+// verify match function. compares one set of class values from each card; if equal (same) then declare 'match'! Reminder: Cannot manipulate 'node' data, so must find other property to reference.
 function checkForMatch() {
   if (toggledCards[0].firstElementChild.className === toggledCards[1].firstElementChild.className) {
     toggledCards[0].classList.toggle('match');
