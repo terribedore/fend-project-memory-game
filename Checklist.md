@@ -1,6 +1,6 @@
 A guide to get you started and to make sure you'll pass. Compiled from the 'Instructions.md' and 'Rubric.pdf' docs.
 # From Instructions:
-This is where to start or if you get stuck.
+This is where to start or if you get stuck. (MY ANSWERS ARE PRECEEDED BY AN 'Inline Quote'.)
 
 1. **Start by building a grid of cards**. After all, the rest of your game's functionality depends on this grid.
   * How many total pairs of cards would you have?
