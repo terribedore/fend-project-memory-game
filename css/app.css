@@ -35,6 +35,61 @@ h1 {
     font-weight: 300;
 }
 
+.hide {
+  display: none;
+}
+
+/*
+ * Styles for the game_won_modal
+ */
+
+.modal_background {
+  position: absolute;
+  min-height: 100%;
+  min-width: 100%;
+  background: rgba(1, 87, 80, 0.7);
+}
+
+/* TODO: a `.show` card does not allow overlay; always sits on top of modal (instead of behind it). FIXED: Since modal does not toggle until all cards are matched, it isn't an issue. */
+.modal_body {
+  position: absolute;
+  /* height: 30%; REMOVED. */
+  /* width: 50%; REMOVED. */
+  top: 50%;
+  left: 50%;
+  transform:translate(-50%, -50%);
+  background: black;
+  color: white;
+}
+
+.modal_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.5rem;
+  padding: 0 2rem;
+  /* border-bottom: 3px white; */ /* << Doesn't seem to be showing up. */
+}
+
+#modal_close {
+  margin-left: 2rem;
+  background-color: white;
+  color: black;
+}
+
+.modal_stats {
+  display: flex;
+  flex-direction: column;
+  padding: 0 2rem;
+}
+
+#modal_reset {
+  float: right;
+  margin: 2rem;
+  background-color: white;
+  color: black;
+}
+
 /*
  * Styles for the deck of cards
  */
