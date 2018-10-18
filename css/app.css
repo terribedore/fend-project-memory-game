@@ -127,12 +127,15 @@ h1 {
 .deck .card.open {
     transform: rotateY(0);
     background: #02b3e4;
+    font-size: 33px;
     cursor: default;
 }
 
-.deck .card.show {
+/* TODO: remove `.show` code. keep comment. */
+/*.deck .card.show {
     font-size: 33px;
 }
+*/ /* Chose to merge `open` and `show` classes as they are *always* used together. */
 
 .deck .card.match {
     cursor: default;
