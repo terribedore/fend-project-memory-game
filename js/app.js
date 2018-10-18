@@ -1,26 +1,24 @@
-// Use this to search class values for each symbol.
+// Testing Tool. Use to search class values for each symbol.
 /* const cards = document.querySelectorAll('.card');
   console.log(cards);
 */
 
 /*
- * Create a list that holds all of your cards
+ * GLOBAL SCOPE
  */
-
-
 const deck = document.querySelector('.deck'); // list to hold all cards.
-//const modal_close = document.querySelector('#modal_close');
-//const modal_reset = document.querySelector('#modal_reset');
-//const restart = document.querySelector('.restart');
-const TOTAL_PAIRS = 1; // or half the number of total cards in deck
+//const modal_close = document.querySelector('#modal_close'); // May use in future to slim code.
+//const modal_reset = document.querySelector('#modal_reset'); // May use in future to slim code.
+//const restart = document.querySelector('.restart'); // May use in future to slim code.
+const TOTAL_PAIRS = 1; // or half the number of total cards in deck // TODO: Change back to '8' before submit!
 
 // Other Global Scope Items
 let toggledCards = []; // List of Cards. Creates the list of clicked and flipped card(s).
-let moves = 0;
-let clockOff = true;
-let time = 0;
-let clockId;
-let matched = 0;
+let moves = 0; // Starts the move counter function at zero.
+let clockOff = true; // Ensures the clock timer function doesn't start *until* the click event.
+let time = 0; // Starts the clock timer function at zero.
+let clockId; // Declares the variable for use in the startClock and stopClock functions.
+let matched = 0; // Starts the matched pairs at zero.
 
 /*
 * Modal Tests
@@ -32,7 +30,7 @@ checkScore(); // 2 stars
 
 writeModalStats(); // write stats to the modal
 toggleModal(); // opens modal
-
+*/
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -79,7 +77,7 @@ shuffleDeck();
  */
 
 // TODO: display card's symbol using `.addeventListener` function. Try using 'click' as the listener and 'toggle' as the action.
-//Do I have to use `open` AND `show` classes here? Try just `open` first.  `open` changes background color but not the symbol. toggling *both* `open` and `show` makes entire card visible.
+//Do I have to use `open` AND `show` classes here? Try just `open` first.  `open` changes background color but not the symbol. toggling *both* `open` and `show` makes entire card visible. IS THERE ANY REASON THEY CAN'T BE MERGED INTO ONE CLASS????
 //Hmm. Having troubles with event listener. Ahha! I forgot to remove 'All' from querySelector.
 
 
@@ -113,7 +111,7 @@ function isClickValid(clickTarget) {
 // flip card function. Actual card flip.
 function toggleCard(clickTarget) {
 clickTarget.classList.toggle('open');
-clickTarget.classList.toggle('show');
+//clickTarget.classList.toggle('show'); // Chose to merge these classes as they are *always* used together.
 }
 
 // add flipped card function. Sends the clicked cards into the below `flippedCards` array (list).
@@ -245,13 +243,13 @@ function toggleModal() {
 function writeModalStats() { // REMINDER: rubric only calls for time, star rating, and if wants to play again. RUBRIC DOES NOT CALL FOR MOVES.
   const timeStat = document.querySelector('.modal_time');
   const clockTime = document.querySelector('.clock').innerHTML;
-  const movesStat = document.querySelector('.modal_moves'); // Not required by Rubric.
   const starsStat = document.querySelector('.modal_stars');
   const stars = getStars();
+  // const movesStat = document.querySelector('.modal_moves'); // Not required by Rubric.
 
   timeStat.innerHTML = `Time = ${clockTime}`;
-  movesStat.innerHTML = `Moves = ${(moves)}`; // Not required by Rubric.
   starsStat.innerHTML = `Stars = ${stars}`;
+  // movesStat.innerHTML = `Moves = ${(moves)}`; // Not required by Rubric. For future use.
 }
 
 function gameOver() {
