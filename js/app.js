@@ -7,8 +7,12 @@
  * Create a list that holds all of your cards
  */
 
-// list to hold all cards.
-const deck = document.querySelector('.deck');
+
+const deck = document.querySelector('.deck'); // list to hold all cards.
+//const modal_close = document.querySelector('#modal_close');
+//const modal_reset = document.querySelector('#modal_reset');
+//const restart = document.querySelector('.restart');
+const TOTAL_PAIRS = 1; // or half the number of total cards in deck
 
 // Other Global Scope Items
 let toggledCards = []; // List of Cards. Creates the list of clicked and flipped card(s).
@@ -16,10 +20,11 @@ let moves = 0;
 let clockOff = true;
 let time = 0;
 let clockId;
+let matched = 0;
 
 /*
 * Modal Tests
-*/
+
 time = 121;
 displayTime(); //2:01
 moves = 16;
@@ -117,12 +122,16 @@ function addToggleCard(clickTarget) {
   console.log(toggledCards);
 }
 
-// verify match function. compares one set of class values from each card; if equal (same) then declare 'match'! Reminder: Cannot manipulate 'node' data, so must find other property to reference.
+// verify match function. compares one set of class values from each card; if equal (same) then declare 'match'! Reminder: Cannot manipulate 'node' data, so must find other property to reference (as in an HTML property).
 function checkForMatch() {
   if (toggledCards[0].firstElementChild.className === toggledCards[1].firstElementChild.className) {
     toggledCards[0].classList.toggle('match');
     toggledCards[1].classList.toggle('match');
     toggledCards = [];
+    matched++;
+    if (matched === TOTAL_PAIRS) {
+      gameOver();
+    }
   }
     else {
     setTimeout(() => {
@@ -155,8 +164,18 @@ function hideStar() {
     }
   }
 }
-hideStar();
-hideStar();
+
+function getStars() {
+  stars = document.querySelectorAll('.stars li');
+  starCount = 0;
+  for (star of stars) {
+    if (star.style.display !== 'none') {
+      starCount++;
+    }
+  }
+  // console.log(starCount); // 2
+  return starCount;
+}
 
 function startClock() {
   clockId = setInterval(() => {
@@ -182,16 +201,78 @@ function stopClock() {
   clearInterval(clockId);
 }
 
+// reset the game function
+function resetGame() {
+  resetClockAndTime();
+  resetMoves();
+  resetStars();
+  shuffleDeck();
+  resetCards();
+}
+
+function resetClockAndTime() {
+  stopClock();
+  clockOff = true;
+  time = 0;
+  displayTime();
+}
+
+function resetMoves() {
+  moves = 0;
+  document.querySelector('.moves').innerHTML = moves;
+}
+
+function resetStars() {
+  stars = 0;
+  const starList = document.querySelectorAll('.stars li');
+  for (star of starList) {
+      star.style.display = 'inline';
+  }
+}
+
+function resetCards() {
+  const cards = document.querySelectorAll('.deck li');
+  for (let card of cards) {
+    card.className = 'card';
+  }
+}
+
 function toggleModal() {
-  const modal = document.querySelector('.modal_background');
+  const modal = document.querySelector('.game_won_modal');
   modal.classList.toggle('hide');
 }
-toggleModal(); //opens modal
-toggleModal(); //closes modal. remove if want to open again.
 
-function writeModalStats() {
+function writeModalStats() { // REMINDER: rubric only calls for time, star rating, and if wants to play again. RUBRIC DOES NOT CALL FOR MOVES.
   const timeStat = document.querySelector('.modal_time');
   const clockTime = document.querySelector('.clock').innerHTML;
+  const movesStat = document.querySelector('.modal_moves'); // Not required by Rubric.
+  const starsStat = document.querySelector('.modal_stars');
+  const stars = getStars();
 
   timeStat.innerHTML = `Time = ${clockTime}`;
+  movesStat.innerHTML = `Moves = ${(moves)}`; // Not required by Rubric.
+  starsStat.innerHTML = `Stars = ${stars}`;
 }
+
+function gameOver() {
+  stopClock();
+  writeModalStats();
+  toggleModal();
+}
+
+// close the modal function. Does NOT reset game.
+document.querySelector('#modal_close').addEventListener('click', event => {
+  toggleModal();
+});
+
+// close the modal AND reset the game function.
+document.querySelector('#modal_reset').addEventListener('click', event => {
+  toggleModal();
+  resetGame();
+  console.log('replay');
+});
+
+// reset the game function.
+document.querySelector('.restart').addEventListener('click', event => {
+  resetGame();
+});
