@@ -120,10 +120,10 @@ This is the one to check off!
 
 #### Usability
 
-- [ ] All application components are usable across
-  - [ ] modern desktop,
-  - [ ] tablet, and
-  - [ ] phone browsers.
+- [x] All application components are usable across
+  - [x] modern desktop,
+  - [x] tablet, and
+  - [x] phone browsers.
 
 ## Documentation
 
