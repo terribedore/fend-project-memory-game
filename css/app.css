@@ -1,4 +1,42 @@
-/* TODO: Insert a TOC here! */
+/*
+  Game Name: Memory Game
+  Game URI: Forked from https://github.com/udacity/fend-project-memory-game
+  Description: Customized game based on the project 'Memory Game' created for the Udacity front end nanodegree program.
+  Version: 1.0.1
+  Author: Terri Bedore
+  Author URI: https://github.com/terribedore/fend-project-memory-game
+*/
+
+
+/* !TABLE OF CONTENTS
+========================================== */
+/*
+- Color Palette (list of all colors used, in first-last order)
+- Global Styles (body, paragraphs, lists, color palette, etc)
+- Modal Styles
+- Deck and Card Styles
+- Score Panel Styles
+*/
+
+
+/***
+COLOR PALETTE
+
+#ffffff - White (background underlay - background has an image overlay)
+#02ccba - Strong Cyan (deck background (top gradient))
+#aa7ecd - Slightly desaturated Violet (deck background (bottom gradient))
+#2e3d49 - Very Dark desaturated Blue (deck and card box shadow)
+#2e3d49 - Very Dark desaturated Blue (card closed background)
+#02b3e4 - Vivid Cyan (card open background)
+#ffffff - White (card open text color)
+#02ccba - Strong Cyan (card match background)
+#015750 - Very Dark Cyan (modal overlay background)
+#2e3d49 - Very Dark desaturated Blue (modal body background, modal button text color)
+#ffffff - White (modal text color, modal button body background)
+***/
+
+/* !Global Styles
+------------------------------------------ */
 
 html {
     box-sizing: border-box;
