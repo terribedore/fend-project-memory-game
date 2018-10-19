@@ -134,7 +134,17 @@ This is the one to check off!
   - [ ] all dependencies.
 
 #### Comments
+HTML
+- [x] Comments are
+  - [x] present and
+  - [x] effectively explain longer code procedure when necessary.
 
+CSS
+- [x] Comments are
+  - [x] present and
+  - [x] effectively explain longer code procedure when necessary.
+
+JavaScript
 - [ ] Comments are
   - [ ] present and
   - [ ] effectively explain longer code procedure when necessary.
