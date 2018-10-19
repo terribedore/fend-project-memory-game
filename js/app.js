@@ -1,5 +1,4 @@
-// Testing Tool. Use to search class values for each symbol.
-/* const cards = document.querySelectorAll('.card');
+/* const cards = document.querySelectorAll('.card'); // Testing Tool. Use to search class values for each symbol.
   console.log(cards);
 */
 
@@ -24,13 +23,14 @@ let matched = 0; // Starts the matched pairs at zero.
 * Modal Tests
 
 time = 121;
-displayTime(); //2:01
+displayTime(); // 2:01
 moves = 16;
 checkScore(); // 2 stars
 
 writeModalStats(); // write stats to the modal
 toggleModal(); // opens modal
 */
+
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
