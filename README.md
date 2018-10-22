@@ -1,3 +1,12 @@
+# Matching / Memory Game
+
+A Memory Card Game for your Browser!
+
+Tags:
+Kids Game, G rated, Game difficulty: Easy.
+
+Unchanged from original fork:
+"
 # Memory Game Project
 
 ## Table of Contents
@@ -18,3 +27,4 @@ For specific, detailed instructions, look at the project instructions in the [Ud
 This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
 
 For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+"
