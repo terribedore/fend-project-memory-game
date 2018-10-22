@@ -88,7 +88,7 @@ h1 {
   background: rgba(1,87,80, 0.7);
 }
 
-/* BUG: a `.show` card does not allow overlay; always sits on top of modal (instead of behind it). FIXED: Since modal does not toggle until all cards are matched, it isn't an issue. FIXED with z-index property! */
+/* BUG: a `.show` card does not allow overlay; always sits on top of modal (instead of behind it). FIXED: with z-index property! */
 .modal_body {
   position: absolute;
   z-index: 2; /* Sit on top. from w3schools */
