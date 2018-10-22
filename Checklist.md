@@ -145,10 +145,10 @@ CSS
   - [x] effectively explain longer code procedure when necessary.
 
 JavaScript
-- [ ] Comments are
-  - [ ] present and
-  - [ ] effectively explain longer code procedure when necessary.
+- [x] Comments are
+  - [x] present and
+  - [x] effectively explain longer code procedure when necessary.
 
 #### Code Quality
 
-- [ ] Code is formatted with consistent, logical, and easy-to-read formatting as described in the Udacity JavaScript Style Guide.
+- [x] Code is formatted with consistent, logical, and easy-to-read formatting as described in the Udacity JavaScript Style Guide.
