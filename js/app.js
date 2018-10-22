@@ -1,44 +1,121 @@
-/* const cards = document.querySelectorAll('.card'); // Testing Tool. Use to search class values for each symbol.
-  console.log(cards);
+/* TABLE OF CONTENTS
+__________________________________________ */
+/*
+Special Thanks
+
+Global Scope
+- global Const Declarations
+-- All Cards List
+-- Future Refactoring (// commented out)
+- global Let Declarations
+- Node Info tool (// commented out)
+- Modal Tests (// commented out)
+
+Functions (listed in order of execution)
+- Start Game Functions
+-- Nodes to Array Function
+-- Shuffle Function (given with starter code)
+- Start Play Functions
+-- Event Listener Function
+--- Is Click Valid Function
+--- Flip Card Function
+--- Add the Toggled Card to Array Function
+--- Verify Match Function
+- Keeping Score Functions
+-- Move Counter Function
+-- Check Score Function
+-- Hide the Star Function (dependent on Check Score)
+-- Star Count Function
+-- Timer Functions
+--- Start Clock
+--- Display Time
+--- Stop Clock
+- Reset Functions
+-- Reset The Game Function
+-- Reset the Clock and Time Function
+-- Reset Move Counter Function
+-- Reset Star Counter Function
+-- Reset the Cards Function
+- Modal Functions
+-- Toggle Modal Fuction
+-- Display Stats Function
+-- Win Game Function
+- Close and/or Reset Modal Functions
+-- Close Modal Function
+-- Close Modal AND Reset Game Function
+-- Reset Game Function
 */
 
-/*
- * GLOBAL SCOPE
- */
-const deck = document.querySelector('.deck'); // list to hold all cards.
-//const modal_close = document.querySelector('#modal_close'); // May use in future to slim code.
-//const modal_reset = document.querySelector('#modal_reset'); // May use in future to slim code.
-//const restart = document.querySelector('.restart'); // May use in future to slim code.
-const TOTAL_PAIRS = 1; // or half the number of total cards in deck // TODO: Change back to '8' before submit!
 
-// Other Global Scope Items
-let toggledCards = []; // List of Cards. Creates the list of clicked and flipped card(s).
+/* SPECIAL THANKS
+__________________________________________ */
+/* Special Thanks to Matthew Cranford. Your walkthrough really helped when I got stuck on the nodes vs array issues!!
+*/
+
+
+/* GLOBAL SCOPE
+__________________________________________ */
+
+/*
+ * Const Declarations
+ */
+const deck = document.querySelector('.deck'); // builds list to hold all cards.
+const TOTAL_PAIRS = 1; // or half the number of total cards in deck // TODO: Change back to '8' before submit!
+//const modal_close = document.querySelector('#modal_close'); // May use in future to refactor code.
+//const modal_reset = document.querySelector('#modal_reset'); // May use in future to refactor code.
+//const restart = document.querySelector('.restart'); // May use in future to refactor code.
+// TODO: The declartions commented out above need more work before they actually work. It will take more time than I have though - 'done is better than perfect'.
+
+/*
+ * Let Declarations
+ */
+let flippedCards = []; // List of Cards. Creates the list of clicked and flipped card(s).
 let moves = 0; // Starts the move counter function at zero.
 let clockOff = true; // Ensures the clock timer function doesn't start *until* the click event.
 let time = 0; // Starts the clock timer function at zero.
 let clockId; // Declares the variable for use in the startClock and stopClock functions.
 let matched = 0; // Starts the matched pairs at zero.
 
+/* Node Info Tool */ // TESTING. Use to search class values for each symbol.
 /*
-* Modal Tests
+const cards = document.querySelectorAll('.card');
+  console.log(cards);
+*/
 
-time = 121;
-displayTime(); // 2:01
+/* Modal Test */ // TESTING. gives function stats to write to the modal and opens modal.
+/*
+time = 185;
+displayTime(); // should be 3:05
 moves = 16;
-checkScore(); // 2 stars
+checkScore(); // should be 2 stars
 
 writeModalStats(); // write stats to the modal
 toggleModal(); // opens modal
 */
 
+
+/* FUNCTIONS (in order of execution)
+__________________________________________ */
+
 /*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
+ * Start Game Functions
  */
 
-// Shuffle function from http://stackoverflow.com/a/2450976
+/* Nodes to Array Function.*/
+// shuffle nodes, turn into array, add to HTML.
+function shuffleDeck() {
+  const cardsToShuffle = Array.from(document.querySelectorAll('.deck li'));
+  // console.log("Cards to Shuffle", cardsToShuffle); // TESTING. shows original grouping.
+  const shuffledCards = shuffle(cardsToShuffle);
+  // console.log("Shuffled Cards", shuffledCards); // TESTING. shows shuffled grouping.
+  for (card of shuffledCards) {
+    deck.appendChild(card);
+  }
+}
+shuffleDeck();
+
+/* Shuffle Function */
+// from http://stackoverflow.com/a/2450976
 function shuffle(array) {
   var currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -53,36 +130,12 @@ function shuffle(array) {
   return array;
 }
 
-// shuffle nodes, turn into array, add to HTML.
-function shuffleDeck() {
-  const cardsToShuffle = Array.from(document.querySelectorAll('.deck li'));
-  // console.log("Cards to Shuffle", cardsToShuffle); // original grouping.
-  const shuffledCards = shuffle(cardsToShuffle);
-  // console.log("Shuffled Cards", shuffledCards); // shuffled grouping.
-  for (card of shuffledCards) {
-    deck.appendChild(card);
-  }
-}
-shuffleDeck();
-
 /*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
+ * Start Play Functions
  */
 
-// TODO: display card's symbol using `.addeventListener` function. Try using 'click' as the listener and 'toggle' as the action.
-//Do I have to use `open` AND `show` classes here? Try just `open` first.  `open` changes background color but not the symbol. toggling *both* `open` and `show` makes entire card visible. IS THERE ANY REASON THEY CAN'T BE MERGED INTO ONE CLASS????
-//Hmm. Having troubles with event listener. Ahha! I forgot to remove 'All' from querySelector.
-
-
-// Event listener function. Upon click, IF a card class AND less than 2 have been clicked, then execute 'Flip Card function'. Once reaches 2 total flips, compare class name for 'match'.
-
+/* Event Listener Function */
+// Upon click, determine if click is valid. If so, start clock and execute 'Flip Card function' and 'Add Flipped Card Function'. Once the number of clicks reaches 2 total flips, compare class name for 'match'. Will also execute 'Add Move' and 'Check Score'Functions.
 deck.addEventListener('click', event => {
   const clickTarget = event.target;
   if (isClickValid(clickTarget)) {
@@ -90,69 +143,84 @@ deck.addEventListener('click', event => {
       startClock();
       clockOff = false;
     }
-  toggleCard(clickTarget);
-  addToggleCard(clickTarget)
+  flipCards(clickTarget);
+  addflipCards(clickTarget)
 }
-  if (toggledCards.length === 2) {
-    checkForMatch(clickTarget);
+  if (flippedCards.length === 2) {
+    verifyMatch(clickTarget);
     addMove();
     checkScore();
   }
 });
+// NOTE: Hmm. Having troubles with event listener. Ahha! I forgot to remove 'All' from querySelector up in the 'All Cards List'. I still get that child/parent thing mixed up...
 
+/* Is Click Valid Function */
+// Click is Valid only If the clicked item is a `card` AND is NOT already matched (`match`) AND not more than 2 cards are flipped over (and not matched).
 function isClickValid(clickTarget) {
   return (
     clickTarget.classList.contains('card') && !clickTarget.classList.contains('match') &&
-    toggledCards.length < 2 &&
-    !toggledCards.includes(clickTarget)
+    flippedCards.length < 2 &&
+    !flippedCards.includes(clickTarget)
   );
 }
 
-// flip card function. Actual card flip.
-function toggleCard(clickTarget) {
+/* Flip Card Function */
+// Actually flips the cards over.
+function flipCards(clickTarget) {
 clickTarget.classList.toggle('open');
 //clickTarget.classList.toggle('show'); // Chose to merge these classes as they are *always* used together.
 }
+// NOTE: Do I have to use `open` AND `show` classes here? Try just `open` first. `open` changes background color but not the symbol. toggling *both* `open` and `show` makes entire card visible. IS THERE ANY REASON THEY CAN'T BE MERGED INTO ONE CLASS????
 
-// add flipped card function. Sends the clicked cards into the below `flippedCards` array (list).
-function addToggleCard(clickTarget) {
-  toggledCards.push(clickTarget);
-  console.log(toggledCards);
+/* Add the Toggled Card to Array Function */
+// Sends the clicked cards into the below `flippedCards` array (list).
+function addflipCards(clickTarget) {
+  flippedCards.push(clickTarget);
+  console.log(flippedCards);
 }
 
-// verify match function. compares one set of class values from each card; if equal (same) then declare 'match'! Reminder: Cannot manipulate 'node' data, so must find other property to reference (as in an HTML property).
-function checkForMatch() {
-  if (toggledCards[0].firstElementChild.className === toggledCards[1].firstElementChild.className) {
-    toggledCards[0].classList.toggle('match');
-    toggledCards[1].classList.toggle('match');
-    toggledCards = [];
+/* Verify Match Function */
+// compares one set of class values from each card; if equal (same) then declare 'match'! Reminder: Cannot manipulate 'node' data, so must find other property to reference (as in an HTML property).
+function verifyMatch() {
+  if (flippedCards[0].firstElementChild.className === flippedCards[1].firstElementChild.className) {
+    flippedCards[0].classList.toggle('match');
+    flippedCards[1].classList.toggle('match');
+    flippedCards = [];
     matched++;
-    if (matched === TOTAL_PAIRS) {
-      gameOver();
+    if (matched === TOTAL_PAIRS) { // This is the part that tells if you've won the game or not. If 'true', then executes `winGame` function.
+      winGame();
     }
   }
     else {
     setTimeout(() => {
-      console.log("No Match.");
-      toggleCard(toggledCards[0]);
-      toggleCard(toggledCards[1]);
-      toggledCards = [];
+      // console.log("No Match."); // TESTING. Should show 'No Match' in dev console.
+      flipCards(flippedCards[0]);
+      flipCards(flippedCards[1]);
+      flippedCards = [];
     }, 1000); // 1000 = 1000 miliseconds = 1 second.
   }
 }
 
+/*
+ * Keeping Score Functions
+ */
+
+/* Move Counter Function */
 function addMove() {
   moves++;
   const movesText = document.querySelector('.moves');
   movesText.innerHTML = moves;
 }
 
+/* Check Score Function */
 function checkScore() {
   if (moves === 16 || moves === 24) {
     hideStar();
   }
 }
 
+/* Hide the Star Function */
+// (dependent on Check Score)
 function hideStar() {
   const starList = document.querySelectorAll('.stars li');
   for (star of starList) {
@@ -163,6 +231,8 @@ function hideStar() {
   }
 }
 
+/* Star Count Function */
+// Counts Stars upon 'win game'
 function getStars() {
   stars = document.querySelectorAll('.stars li');
   starCount = 0;
@@ -171,18 +241,20 @@ function getStars() {
       starCount++;
     }
   }
-  // console.log(starCount); // 2
+  // console.log(starCount); // TESTING. Should show 2.
   return starCount;
 }
 
+/* Start Clock Function */
 function startClock() {
   clockId = setInterval(() => {
     time++;
     displayTime();
     console.log(time);
-  }, 1000); // 1000 = 1000 miliseconds = 1 second.
+  }, 1000); // REMINDER. 1000 = 1000 miliseconds = 1 second.
 }
 
+/* Display Time Function */
 function displayTime() {
   const minutes = Math.floor(time / 60);
   const seconds = time % 60;
@@ -195,11 +267,17 @@ function displayTime() {
   }
 }
 
+/* Stop Clock Function */
+// Stops the clock upon win.
 function stopClock() {
   clearInterval(clockId);
 }
 
-// reset the game function
+/*
+ * Reset Functions
+ */
+
+/* Reset The Game Function */
 function resetGame() {
   resetClockAndTime();
   resetMoves();
@@ -208,6 +286,8 @@ function resetGame() {
   resetCards();
 }
 
+/* Reset the Clock and Time Function */
+// Sets the clock and displayed timer to starting position of 0.
 function resetClockAndTime() {
   stopClock();
   clockOff = true;
@@ -215,11 +295,15 @@ function resetClockAndTime() {
   displayTime();
 }
 
+/* Reset Move Counter Function */
+// Sets the move counter to starting position of 0.
 function resetMoves() {
   moves = 0;
   document.querySelector('.moves').innerHTML = moves;
 }
 
+/* Reset Star Counter Function */
+// Sets the Star Counter to strating position of 3.
 function resetStars() {
   stars = 0;
   const starList = document.querySelectorAll('.stars li');
@@ -228,6 +312,8 @@ function resetStars() {
   }
 }
 
+/* Reset the Cards Function */
+// Flips the cards back to their starting position.
 function resetCards() {
   const cards = document.querySelectorAll('.deck li');
   for (let card of cards) {
@@ -235,42 +321,57 @@ function resetCards() {
   }
 }
 
+/*
+ * Modal Functions
+ */
+
+/* Toggle Modal Function */
+// Upon matching all the pairs, toggles the `game_won_modal`.
 function toggleModal() {
   const modal = document.querySelector('.game_won_modal');
   modal.classList.toggle('hide');
 }
 
+/* Display Stats Function */
+// Add stats to the Modal upon 'win game'
 function writeModalStats() { // REMINDER: rubric only calls for time, star rating, and if wants to play again. RUBRIC DOES NOT CALL FOR MOVES.
   const timeStat = document.querySelector('.modal_time');
   const clockTime = document.querySelector('.clock').innerHTML;
   const starsStat = document.querySelector('.modal_stars');
   const stars = getStars();
-  // const movesStat = document.querySelector('.modal_moves'); // Not required by Rubric.
+  // const movesStat = document.querySelector('.modal_moves'); // Not required by Rubric. For future use.
 
   timeStat.innerHTML = `Time = ${clockTime}`;
   starsStat.innerHTML = `Stars = ${stars}`;
   // movesStat.innerHTML = `Moves = ${(moves)}`; // Not required by Rubric. For future use.
 }
 
-function gameOver() {
+/* Win Game Function */
+function winGame() {
   stopClock();
   writeModalStats();
   toggleModal();
 }
 
-// close the modal function. Does NOT reset game.
+/*
+ * Close and/or Reset Modal Functions
+ */
+
+/* Close Modal Function */
+// Does NOT reset game.
 document.querySelector('#modal_close').addEventListener('click', event => {
   toggleModal();
 });
 
-// close the modal AND reset the game function.
+/* Close Modal AND Reset Game Function */
 document.querySelector('#modal_reset').addEventListener('click', event => {
   toggleModal();
   resetGame();
   console.log('replay');
 });
 
-// reset the game function.
+/* Reset Game Function */
+// For JUST the reset button.
 document.querySelector('.restart').addEventListener('click', event => {
   resetGame();
 });
