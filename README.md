@@ -2,29 +2,43 @@
 
 A Memory Card Game for your Browser!
 
-Tags:
+### Tags
 Kids Game, G rated, Game difficulty: Easy.
 
-Unchanged from original fork:
-"
-# Memory Game Project
 
 ## Table of Contents
 
 * [Instructions](#instructions)
 * [Contributing](#contributing)
+* [License](#license)
+* [Contact](#contact)
+
 
 ## Instructions
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+This game is meant to be played on a browser.
 
-To get started, open `js/app.js` and start building out the app's functionality
+To install: fork/copy and save/install these on your local browser or personal website
+* [HTML](index.html) FILE
+* [CSS](css) FOLDER + CONTENTS
+* [img](img) FOLDER + CONTENTS
+* [JavaScript](js) FOLDER + CONTENTS
 
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
+To use:
+* Open Browser and point it to your `index.html` file.
+* Begin Playing!
+
 
 ## Contributing
 
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
+This repository is meant to remain 'frozen' for future reflection. Any refactoring will be done at a future time and will be forked then renamed. The link to that forked project, will then be shown here.
 
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
-"
+## License
+
+This Game was created based on the project requirements for the Udacity Front End Developer nanodegree program. [Starter code and files](https://github.com/udacity/fend-project-memory-game)
+
+As of 22 Oct 2018, Udacity does not explicity state licensing. Until they (or I) choose otherwise, please use for fun and not profit. (aka [MIT](LICENSE.md))
+
+## Contact
+
+Want more? You can check out my [repos](https://github.com/terribedore?tab=repositories) or get in touch with me at my personal / profession ['webhub'](https://terribedore.com)
