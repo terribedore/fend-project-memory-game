@@ -60,7 +60,7 @@ __________________________________________ */
  * Const Declarations
  */
 const deck = document.querySelector('.deck'); // builds list to hold all cards.
-const TOTAL_PAIRS = 1; // or half the number of total cards in deck // TODO: Change back to '8' before submit!
+const TOTAL_PAIRS = 8; // or half the number of total cards in deck // TODO: Change back to '8' before submit!
 //const modal_close = document.querySelector('#modal_close'); // May use in future to refactor code.
 //const modal_reset = document.querySelector('#modal_reset'); // May use in future to refactor code.
 //const restart = document.querySelector('.restart'); // May use in future to refactor code.
