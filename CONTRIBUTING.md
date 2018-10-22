@@ -1,3 +1,3 @@
 # How to contribute
 
-The files in this repository are used as the starting point for all students. Because we want students to write the majority of the code themselves, pull requests (most likely) will _not_ be merged into the project.
+The files in this repository are part of my classwork for the Udacity program. Because I want my work to remain 'frozen', pull requests will _not_ be merged into this project. I _will_ consider pull requests for another version of this project.
