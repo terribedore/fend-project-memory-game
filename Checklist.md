@@ -129,9 +129,9 @@ This is the one to check off!
 
 #### README
 
-- [ ] A README file is included detailing
-  - [ ] the game and
-  - [ ] all dependencies.
+- [x] A README file is included detailing
+  - [x] the game and
+  - [x] all dependencies.
 
 #### Comments
 HTML
