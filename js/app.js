@@ -86,21 +86,23 @@ function shuffle(array) {
  */
 
 /* Event Listener Function */
-// Upon click, determine if click is valid. If so, start clock and execute 'Flip Card function' and 'Add Flipped Card Function'. Once the number of clicks reaches 2 total flips, compare class name for 'match'. Will also execute 'Add Move' and 'Check Score'Functions.
+// Upon click, determine if click is valid (including if clicked is greater than 2). If so, start clock and execute 'Flip Card function' and 'Add Flipped Card Function'. Once the number of clicks reaches 2 total flips, compare class name for 'match'. Will also execute 'Add Move' and 'Check Score'Functions.
 deck.addEventListener('click', event => {
   const clickTarget = event.target;
-  if (isClickValid(clickTarget)) {
-    if (clockOff) {
-      startClock();
-      clockOff = false;
+  if (flippedCards.length !== 2) { // prevents a card from being clicked if the flipped card array does not equal 2.
+    if (isClickValid(clickTarget)) {
+      if (clockOff) {
+        startClock();
+        clockOff = false;
+      }
+      flipCards(clickTarget);
+      addflipCards(clickTarget)
     }
-  flipCards(clickTarget);
-  addflipCards(clickTarget)
-}
-  if (flippedCards.length === 2) {
-    verifyMatch(clickTarget);
-    addMove();
-    checkScore();
+    if (flippedCards.length === 2) {
+      verifyMatch(clickTarget);
+      addMove();
+      checkScore();
+    }
   }
 });
 // NOTE: Hmm. Having troubles with event listener. Ahha! I forgot to remove 'All' from querySelector up in the 'All Cards List'. I still get that child/parent thing mixed up...
@@ -109,7 +111,8 @@ deck.addEventListener('click', event => {
 // Click is Valid only If the clicked item is a `card` AND is NOT already matched (`match`) AND not more than 2 cards are flipped over (and not matched).
 function isClickValid(clickTarget) {
   return (
-    clickTarget.classList.contains('card') && !clickTarget.classList.contains('match') &&
+    clickTarget.classList.contains('card') &&
+    !clickTarget.classList.contains('match') &&
     flippedCards.length < 2 &&
     !flippedCards.includes(clickTarget)
   );
@@ -118,7 +121,7 @@ function isClickValid(clickTarget) {
 /* Flip Card Function */
 // Actually flips the cards over.
 function flipCards(clickTarget) {
-clickTarget.classList.toggle('open');
+  clickTarget.classList.toggle('open');
 //clickTarget.classList.toggle('show'); // Chose to merge these classes as they are *always* used together.
 }
 // NOTE: Do I have to use `open` AND `show` classes here? Try just `open` first. `open` changes background color but not the symbol. toggling *both* `open` and `show` makes entire card visible. IS THERE ANY REASON THEY CAN'T BE MERGED INTO ONE CLASS????
@@ -201,7 +204,6 @@ function startClock() {
   clockId = setInterval(() => {
     time++;
     displayTime();
-    console.log(time);
   }, 1000); // REMINDER. 1000 = 1000 miliseconds = 1 second.
 }
 
