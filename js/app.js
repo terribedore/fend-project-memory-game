@@ -20,6 +20,7 @@ const TOTAL_PAIRS = 8; // or half the number of total cards in deck // TODO: Cha
 /*
  * Let Declarations
  */
+// TODO: Future Refactoring. via Reviewer One. "Pro2Pro Tip 💡: It's never a good idea to leave variables open for modification by declaring them globally. During the gameplay, anyone can open the console and set the value of moves to any desired value. Instead, you can move all these variables inside a function like update_moves() to save your game from such vulnerability."
 let flippedCards = []; // List of Cards. Creates the list of clicked and flipped card(s).
 let moves = 0; // Starts the move counter function at zero.
 let clockOff = true; // Ensures the clock timer function doesn't start *until* the click event.
@@ -135,6 +136,7 @@ function addflipCards(clickTarget) {
 
 /* Verify Match Function */
 // compares one set of class values from each card; if equal (same) then declare 'match'! Reminder: Cannot manipulate 'node' data, so must find other property to reference (as in an HTML property).
+// TODO: Future Refactoring. Via Reviewer One. "Great Job with matching logic !!!, you should check out an awesome library of CSS which will add some animations when your cards match or mismatch you can add some animation there like shake the card or something else please check out the below link for more detail @ https://github.com/daneden/animate.css/"
 function verifyMatch() {
   if (flippedCards[0].firstElementChild.className === flippedCards[1].firstElementChild.className) {
     flippedCards[0].classList.toggle('match');
@@ -208,6 +210,7 @@ function startClock() {
 }
 
 /* Display Time Function */
+// TODO: Future Refactoring. Via Reviewer One. "The timer logic is perfect but there is an awesome library for timer related stuff you should check it out. @ https://github.com/husa/timer.js/"
 function displayTime() {
   const minutes = Math.floor(time / 60);
   const seconds = time % 60;
@@ -277,6 +280,7 @@ function resetCards() {
 /*
  * Modal Functions
  */
+// TODO: Future Refactoring. Via Reviewer One. "Great work with functions making the code in form of modules is good practice keep it up!!!.Although you can use new js to making functions called arrow functions. @https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions"
 
 /* Toggle Modal Function */
 // Upon matching all the pairs, toggles the `game_won_modal`.
